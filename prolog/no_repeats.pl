@@ -16,6 +16,7 @@
             no_repeats_findall_r/5,
             no_repeats_old/1,
             no_repeats_old/2,
+            no_repeats_cmp/3,
             no_repeats_save/2,
             no_repeats_save/4,
             no_repeats_u/2,
@@ -35,6 +36,7 @@
         no_repeats_findall_r(+, 0, -, -, -),
         no_repeats_old(0),
         no_repeats_old(+, 0),
+        no_repeats_cmp(2, +, 0),
         no_repeats_save(+, 0),
         no_repeats_save(+, 0, -, -),
         no_repeats_u(+, 0),
@@ -43,10 +45,12 @@
 :- module_transparent
         memberchk_same/2,
         no_repeats_av/0,
+        no_repeats_cmp/3,
         subtract_eq/3,
         nr_test/2.
 
       
+:- set_module(class(library)).
 
 %% loop_check_nr( ?CL) is semidet.
 %
@@ -54,17 +58,6 @@
 %
 loop_check_nr(CL):- loop_check(no_repeats(CL)).
 
-
-:- if(current_predicate(lmcode:combine_logicmoo_utils/0)).
-:- module(logicmoo_util_no_repeats,
-[  % when the predciates are not being moved from file to file the exports will be moved here
-       ]).
-
-:- else.
-
-:- endif.
-
-:- set_module(class(library)).
 
 % ===================================================================
 
@@ -223,11 +216,18 @@ memberchk_pred_rev(Pred, X, [Y|Ys]) :- (   call(Pred,Y,X) -> true ;   (nonvar(Ys
 % No Repeats Old.
 %
 no_repeats_old(Vs,Call):- ground(Vs),!,Call,!.
-no_repeats_old(Vs,Call):- CONS = [_], (Call), quietly(( \+ memberchk_same(Vs,CONS), copy_term(Vs,CVs), CONS=[_|T], nb_setarg(2, CONS, [CVs|T]))).
+no_repeats_old(Vs,Call):- CONS = [_], (Call), 
+   quietly(( \+ memberchk_same(Vs,CONS), copy_term(Vs,CVs), CONS=[_|T], nb_setarg(2, CONS, [CVs|T]))).
 
 % mcs_t2(A,B) :- call(lambda(X, [Y|Ys], (   X =@= Y ->  (var(X) -> X==Y ; true) ;   (nonvar(Ys),reenter_lambda(X, Ys) ))),A,B).
 % mcs_t(A,B) :- call(lambda(X, [Y|Ys], (   X =@= Y ->  (var(X) -> X==Y ; true) ;   (nonvar(Ys),reenter_lambda(X, Ys) ))),A,B).
 
+no_repeats_cmp(_,Vs,Call):- ground(Vs),!,Call,!.
+no_repeats_cmp(Cmp,Vs,Call):- CONS = [zzzZZZZzzzzZZZ], (Call), 
+   quietly(( \+ memberchk_cmp(Cmp,Vs,CONS), copy_term(Vs,CVs), CONS=[_|T], nb_setarg(2, CONS, [CVs|T]))).
+
+memberchk_cmp(Cmp,Vs,CONS):-
+   member(XY,CONS),call(Cmp,Vs,XY),!.
 
 /*
 :- meta_predicate no_repeats_t(?,0).
