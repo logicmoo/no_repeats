@@ -4,7 +4,7 @@ New ways to avoid duplicate solutions
 
 ```prolog
 
-:- pack_install('https://github.com/TeamSPoon/no_repeats.git').
+:- pack_install('https://github.com/TeamSPoon/pack_no_repeats.git').
 
 ```
 

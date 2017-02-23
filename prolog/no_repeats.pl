@@ -64,6 +64,8 @@ loop_check_nr(CL):- loop_check(no_repeats(CL)).
 :- include('logicmoo_util_header.pi').
 :- endif.
 
+:- set_module(class(library)).
+
 % ===================================================================
 
 :- thread_local  tlbugger:attributedVars.
@@ -243,7 +245,7 @@ no_repeats_t(Vs,Call):- CONS = [_], (Call), (( \+ call(lambda(X, [Y|Ys], (   X =
 %
 % No Repeats For User Code.
 %
-no_repeats_u(Vs,Call):- CONS = [_], (Call), /*hotrace*/((  CONS=[_|T],
+no_repeats_u(Vs,Call):- CONS = [_], (Call), /*quietly*/((  CONS=[_|T],
     \+ memberchk_pred_rev(subsumes_term,Vs,T), copy_term(Vs,CVs), nb_setarg(2, CONS, [CVs|T]))).
 
 
