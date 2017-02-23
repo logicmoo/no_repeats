@@ -61,7 +61,7 @@ loop_check_nr(CL):- loop_check(no_repeats(CL)).
        ]).
 
 :- else.
-:- include('logicmoo_util_header.pi').
+
 :- endif.
 
 :- set_module(class(library)).
