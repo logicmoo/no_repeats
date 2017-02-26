@@ -115,7 +115,7 @@ no_repeats_av:-tlbugger:attributedVars.
 
 
 
-%% no_repeats( :GoalCall) is semidet.
+%% no_repeats( :Goal) is semidet.
 %
 % No Repeats.
 %
@@ -129,7 +129,7 @@ no_repeats(Call):- no_repeats_old(Call).
 
 
 
-%% no_repeats( +Vs, :GoalCall) is semidet.
+%% no_repeats( +Vs, :Goal) is semidet.
 %
 % No Repeats.
 %
@@ -157,7 +157,7 @@ no_repeats_dif(Vs,Call):- dif(Vs,_), get_attr(Vs,dif,vardif(CONS,_)),!,
 
 
 
-%% no_repeats_old( :GoalCall) is semidet.
+%% no_repeats_old( :Goal) is semidet.
 %
 % No Repeats Old.
 %
@@ -218,7 +218,7 @@ memberchk_pred_rev(Pred, X, [Y|Ys]) :- (   call(Pred,Y,X) -> true ;   (nonvar(Ys
 
 
 
-%% no_repeats_old( +Vs, :GoalCall) is semidet.
+%% no_repeats_old( +Vs, :Goal) is semidet.
 %
 % No Repeats Old.
 %
@@ -241,7 +241,7 @@ no_repeats_t(Vs,Call):- CONS = [_], (Call), (( \+ call(lambda(X, [Y|Ys], (   X =
 
 
 
-%% no_repeats_u( +Vs, :GoalCall) is semidet.
+%% no_repeats_u( +Vs, :Goal) is semidet.
 %
 % No Repeats For User Code.
 %
@@ -326,7 +326,7 @@ no_repeats_av(Term,Call):-term_variables(Term,List),!,no_repeats_av_l(List,Call)
 
 
 
-%% succeeds_n_times( :GoalGoal, -Times) is semidet.
+%% succeeds_n_times( :Goal, -Times) is semidet.
 %
 % Succeeds N Times.
 %
@@ -347,7 +347,7 @@ succeeds_n_times(Goal, Times) :-
 
 
 
-%% no_repeats_findall5( +Vs, :GoalCall, -ExitDET, -USE, -NEW) is semidet.
+%% no_repeats_findall5( +Vs, :Goal, -ExitDET, -USE, -NEW) is semidet.
 %
 % No Repeats Findall5.
 %
@@ -372,7 +372,7 @@ no_repeats_findall5(Vs,Call,ExitDET,USE,NEW):-
 
 
 
-%% no_repeats_save( +Vs, :GoalCall, -Saved, -USE) is semidet.
+%% no_repeats_save( +Vs, :Goal, -Saved, -USE) is semidet.
 %
 % No Repeats Save.
 %
@@ -387,7 +387,7 @@ no_repeats_save(Vs,Call,Saved,USE):-
 
 
 
-%% no_repeats_save( +Vs, :GoalCall) is semidet.
+%% no_repeats_save( +Vs, :Goal) is semidet.
 %
 % No Repeats Save.
 %
@@ -403,7 +403,7 @@ no_repeats_save(Vs,Call):-
 
 
 
-%% no_repeats_findall_r( +Vs, :GoalCall, -CONS, -ExitDET, -List) is semidet.
+%% no_repeats_findall_r( +Vs, :Goal, -CONS, -ExitDET, -List) is semidet.
 %
 % No Repeats Findall R.
 %

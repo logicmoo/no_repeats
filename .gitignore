@@ -8,6 +8,5 @@
 *.log
 *.log.*
 *.sig
-
-pkg/
-src/
+*.qlf
+INDEX.pl
