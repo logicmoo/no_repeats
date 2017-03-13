@@ -1,5 +1,5 @@
 name(no_repeats).
-version('1.1.112').
+version('1.1.113').
 title('New ways to avoid duplicate solutions').
 keywords([tools,aggregation]).
 author( 'Douglas Miles', 'http://www.linkedin.com/in/logicmoo' ).
