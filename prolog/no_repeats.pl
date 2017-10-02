@@ -7,6 +7,7 @@
             memberchk_same1/2,
             memberchk_same2/2,
             memberchk_same3/2,
+            memberchk_cmp/3,
             memb_r/2,
             must_not_repeat/1,
             no_repeats/1,
