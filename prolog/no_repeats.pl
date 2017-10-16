@@ -424,10 +424,15 @@ no_repeats_findall_r(Vs,Call,CONS,ExitDET,List):-
 %  X = 3;
 %  No.
 %  ==
-no_repeats_var(Var):- nonvar(Var) ->true; (get_attr(Var,nr,_)->true;put_attr(Var,nr,old_vals([]))).
-nr:attr_unify_hook(AttValue,VarValue):- AttValue=old_vals(Waz), \+ memberchk_same(VarValue,Waz),nb_setarg(1,AttValue,[VarValue|Waz]).
+no_repeats_var(Var):- nonvar(Var) ->true; (get_attr(Var,nr,_)->true;put_attr(Var,nr,old_vals(Var,same_forms,[]))).
+no_repeats_var(Cmp,Var):- nonvar(Var) ->true; (get_attr(Var,nr,_)->true;put_attr(Var,nr,old_vals(Var,Cmp,[]))).
+nr:attr_unify_hook(AttValue,VarValue):- AttValue=old_vals(_Var,Cmp,Waz), \+ memberchk_pred(Cmp,VarValue,Waz),nb_setarg(1,AttValue,[VarValue|Waz]).
 
-
+same_forms(F1,F2):- get_attrs(F1,A1),!,get_attrs(F2,A2),A1=@=A2.
+same_forms(F1,F2):- get_attrs(F2,A1),!,get_attrs(F1,A2),A1=@=A2.
+same_forms(F1,F2):- var(F1),!,F2==F1.
+same_forms(F1,F2):- var(F2),!,F2==F1.
+same_forms(F1,F2):- F1=@=F2.
 
 %% nr_test( :PRED-1VALUE1, :PRED1VALUE2) is semidet.
 %
