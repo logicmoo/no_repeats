@@ -15,7 +15,7 @@
             no_repeats_av/0,
             no_repeats_findall5/5,
             no_repeats_findall_r/5,
-            no_repeats_old/1,
+            no_repeats_old/1,         
             no_repeats_old/2,
             no_repeats_cmp/3,
             no_repeats_save/2,
