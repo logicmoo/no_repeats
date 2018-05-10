@@ -434,6 +434,9 @@ same_forms(F1,F2):- var(F1),!,F2==F1.
 same_forms(F1,F2):- var(F2),!,F2==F1.
 same_forms(F1,F2):- F1=@=F2.
 
+
+:- fixup_exports.
+
 %% nr_test( :PRED-1VALUE1, :PRED1VALUE2) is semidet.
 %
 % Term.
@@ -454,3 +457,5 @@ nr_test((-4), 0).
 nr_test(45,0).
 nr_test(45,9).
 nr_test((-1),1).
+
+
